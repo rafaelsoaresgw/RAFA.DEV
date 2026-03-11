@@ -1,0 +1,330 @@
+/* --- CONFIGURAÇÕES E TIPOGRAFIA FINA --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body { 
+    background-color: #000; 
+    color: white; 
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 76%; 
+    max-width: 1500px; 
+    padding: 22px 20px 22px 60px; 
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 999;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* --- ESTADO SCROLLED (FUNDO PRETO) --- */
+.navbar.scrolled {
+    background: #000000 !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 300; 
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+    min-width: 180px;
+}
+
+.nav-desktop ul {
+    display: flex;
+    gap: 50px; 
+    list-style: none;
+}
+
+.nav-desktop a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.btn-acao {
+    background: white;
+    color: black;
+    padding: 14px 45px; 
+    border-radius: 100px;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.icon-mobile { display: none; }
+
+/* --- HERO --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.hero-content { position: relative; z-index: 3; }
+
+.cidade-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px; 
+    height: 65px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    margin-bottom: 30px;
+}
+
+.cidade-btn {
+    background: white;
+    color: black;
+    padding: 8px 35px;
+    border-radius: 100px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.hero h1 { font-size: clamp(32px, 5vw, 68px); font-weight: 300; }
+
+/* --- ART SECTION (COM CAMUFLAGEM NO TOPO) --- */
+.art-section {
+    padding: 80px 20px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    position: relative; /* Necessário para o pseudo-elemento */
+}
+
+/* Efeito de camuflagem: gradiente sutil que simula uma transição suave */
+.art-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Altura do efeito */
+    background: linear-gradient(to bottom, 
+        rgba(255,255,255,0.03) 0%, 
+        rgba(255,255,255,0.01) 30%, 
+        transparent 100%);
+    pointer-events: none; /* Não atrapalha cliques */
+    z-index: 1;
+}
+
+/* Opcional: uma linha sutil brilhante no topo */
+.art-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent); /* dourado suave */
+    pointer-events: none;
+    z-index: 2;
+}
+
+.art-container {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative; /* Para ficar acima dos pseudo-elementos */
+    z-index: 3;
+}
+
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.art-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.art-title span { font-style: italic; color: #888; }
+
+.art-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+}
+
+.art-features {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.image-stack { position: relative; }
+
+.img-main {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.8s ease;
+}
+
+.img-main:hover { filter: grayscale(0%); }
+
+.experience-badge {
+    position: absolute;
+    bottom: -15px;
+    right: -10px;
+    background: #fff;
+    color: #000;
+    padding: 15px 25px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-minimal {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+/* --- RESPONSIVIDADE MOBILE (NAVBAR) --- */
+@media (max-width: 900px) {
+    .navbar {
+        max-width: 92%;
+        padding: 10px 15px 10px 25px; 
+        top: 15px;
+    }
+    .nav-desktop { display: none; }
+    .menu-toggle { display: flex; flex-direction: column; gap: 6px; }
+    .menu-toggle span { width: 26px; height: 1px; background: white; }
+    .text-pc { display: none; }
+    .icon-mobile { display: block; width: 22px; height: 22px; fill: black; }
+    .btn-acao { width: 65px; height: 40px; padding: 0; justify-content: center; }
+}
+
+/* --- AJUSTE EXCLUSIVO PARA PC --- */
+@media (min-width: 992px) {
+    .art-section { padding: 150px 0; }
+    .art-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 120px;
+    }
+    .img-main { height: 600px; }
+    /* Ajuste na camuflagem para pc */
+    .art-section::before {
+        height: 120px; /* um pouco mais alto em telas grandes */
+        background: linear-gradient(to bottom, 
+            rgba(255,255,255,0.05) 0%, 
+            rgba(255,255,255,0.02) 20%, 
+            transparent 100%);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* --- EFEITO DE NÉVOA PROFISSIONAL (FOG) --- */
+.hero-fog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150%; /* Altura maior para cobrir bem a transição */
+    background: 
+        radial-gradient(ellipse at 50% 80%, rgba(0,0,0,0.8) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px); /* ruído sutil */
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.1s linear; /* suave, mas controlado pelo scroll */
+    mix-blend-mode: multiply; /* ajuda a integrar com o vídeo */
+    will-change: opacity;
+}
+
+/* Ajuste para mobile */
+@media (max-width: 900px) {
+    .hero-fog {
+        height: 120%;
+        background: radial-gradient(ellipse at 50% 80%, rgba(0,0,0,0.7) 0%, transparent 80%);
+    }
+}
+}

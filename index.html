@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feel King Barbearia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar" id="mainNavbar">
+        <div class="logo">
+            demonstração<br>Rafa.dev
+        </div>
+
+        <nav class="nav-desktop">
+            <ul>
+                <li><a href="#">O Conceito .dev</a></li>
+                <li><a href="#">Nossos Serviços ▾</a></li>
+                <li><a href="#">Unidades ▾</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-right">
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <a href="https://wa.me/seunumero" class="btn-acao" target="_blank">
+                <span class="text-pc">Agendar</span>
+                <svg class="icon-mobile" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 0 5.415 0 12.05c0 2.12.556 4.188 1.612 6.01L0 24l6.135-1.61a11.8 11.8 0 005.912 1.586h.005c6.635 0 12.05-5.415 12.05-12.05a11.82 11.82 0 00-3.535-8.528z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="img/1086522-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <div class="cidade-wrapper">
+                <span class="cidade-btn">RIO CLARO - SP</span>
+            </div>
+            <h1>Sua melhor versão<br>está aqui.</h1>
+            <p>A experiência premium que você merece.</p>
+        </div>
+        <!-- Overlay de névoa que será controlado pelo scroll -->
+        <div class="hero-fog"></div>
+    </section>
+
+    <!-- ART SECTION -->
+    <section class="art-section">
+        <div class="art-container">
+            <div class="art-visual">
+                <div class="image-stack">
+                    <img src="img/pexels-djordje-petrovic-590080-1433270.jpg" alt="Work" class="img-main">
+                    <div class="experience-badge">EST. 2026</div>
+                </div>
+            </div>
+            
+            <div class="art-content">
+                <span class="eyebrow">A ARTE DO CUIDADO</span>
+                <h2 class="art-title">Onde a tradição<br>encontra a <span>identidade</span>.</h2>
+                <p class="art-text">
+                    Transformo ideias em experiências digitais que conectam, impactam e entregam resultados. Cada linha de código é escrita com propósito, cada interface é pensada para emocionar e cada sistema é desenvolvido para simplificar. Mais do que sites e sistemas, construo pontes entre seu negócio e o futuro — porque a tecnologia certa não só resolve problemas: ela abre possibilidades.
+                </p>
+                <div class="art-features">
+                    <div class="feature-item">
+                        <span class="feature-num">01</span>
+                        <p>Tatu Premium</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-num">02</span>
+                        <p>FEITO POR RAFAEL</p>
+                    </div>
+                </div>
+                <a href="#" class="btn-minimal">Conhecer o Conceito</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        const hero = document.querySelector('.hero');
+        const artSection = document.querySelector('.art-section');
+        const fog = document.querySelector('.hero-fog');
+        
+        if (!hero || !artSection || !fog) return;
+
+        function updateFog() {
+            const scrollY = window.scrollY;
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            const artTop = artSection.offsetTop;
+            const viewportHeight = window.innerHeight;
+
+            // Distância do início da art section em relação ao fundo da hero
+            // Começa a aparecer quando a art section está a 300px de entrar
+            const startFade = heroBottom - viewportHeight * 0.3;
+            const endFade = artTop - viewportHeight * 0.2;
+
+            let opacity = 0;
+            if (scrollY > startFade) {
+                opacity = Math.min(1, (scrollY - startFade) / (endFade - startFade));
+                // Suavização com easing cúbico
+                opacity = opacity < 0.5 ? 2 * opacity * opacity : 1 - Math.pow(-2 * opacity + 2, 2) / 2;
+            }
+
+            fog.style.opacity = opacity;
+        }
+
+        window.addEventListener('scroll', updateFog, { passive: true });
+        updateFog(); // chamada inicial
+    })();
+</script>
+
+</body>
+</html>
