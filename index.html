@@ -2,16 +2,50 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feel King Barbearia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>MF TATTOO | Estúdio de Tatuagem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- ========== PRELOADER PREMIUM COM ARTE ========== -->
+    <div id="preloader" class="preloader">
+        <!-- Camada artística de fundo -->
+        <div class="preloader-art">
+            <div class="halftone"></div>
+            <div class="ink-spread"></div>
+        </div>
+
+        <div class="preloader-content">
+            <div class="preloader-text first">o melhor estudo de tatuagem</div>
+            <div class="preloader-divider"></div>
+            <div class="preloader-text second">MF TATTOO</div>
+        </div>
+    </div>
+
+    <nav class="nav-mobile-overlay" id="mobileMenu">
+        <div class="menu-header-mobile">
+            <div class="logo">demonstração<br>Rafa.dev</div>
+            <button class="close-menu" id="closeMenu">&times;</button>
+        </div>
+        <ul>
+            <li><a href="#">O Conceito .dev</a></li>
+            <li><a href="#">Nossos Serviços <span class="arrow-mobile">▼</span></a></li>
+            <li><a href="#">Unidades <span class="arrow-mobile">▼</span></a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <div class="menu-backdrop" id="menuBackdrop"></div>
+
     <header class="navbar" id="mainNavbar">
         <div class="logo">
-            demonstração<br>Rafa.dev
+           <a href="#">
+        <img src="img/Captura_de_tela_2026-03-25_180338-removebg-preview.png" alt="Rafa.dev" class="logo-img">
+    </a>
         </div>
 
         <nav class="nav-desktop">
@@ -24,7 +58,7 @@
         </nav>
 
         <div class="nav-right">
-            <div class="menu-toggle">
+            <div class="menu-toggle" id="openMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -45,16 +79,14 @@
         </video>
         <div class="hero-content">
             <div class="cidade-wrapper">
-                <span class="cidade-btn">RIO CLARO - SP</span>
+                <span class="cidade-btn">SÃO PAULO</span>
             </div>
             <h1>Sua melhor versão<br>está aqui.</h1>
             <p>A experiência premium que você merece.</p>
         </div>
-        <!-- Overlay de névoa que será controlado pelo scroll -->
         <div class="hero-fog"></div>
     </section>
 
-    <!-- ART SECTION -->
     <section class="art-section">
         <div class="art-container">
             <div class="art-visual">
@@ -68,16 +100,16 @@
                 <span class="eyebrow">A ARTE DO CUIDADO</span>
                 <h2 class="art-title">Onde a tradição<br>encontra a <span>identidade</span>.</h2>
                 <p class="art-text">
-                    Transformo ideias em experiências digitais que conectam, impactam e entregam resultados. Cada linha de código é escrita com propósito, cada interface é pensada para emocionar e cada sistema é desenvolvido para simplificar. Mais do que sites e sistemas, construo pontes entre seu negócio e o futuro — porque a tecnologia certa não só resolve problemas: ela abre possibilidades.
+                    Transformo ideias em experiências digitais que conectam, impactam e entregam resultados. Cada linha de código é escrita com propósito, cada interface é pensada para emocionar e cada sistema é desenvolvido para simplificar.
                 </p>
                 <div class="art-features">
                     <div class="feature-item">
                         <span class="feature-num">01</span>
-                        <p>Tatu Premium</p>
+                        <p>Design Premium</p>
                     </div>
                     <div class="feature-item">
                         <span class="feature-num">02</span>
-                        <p>FEITO POR RAFAEL</p>
+                        <p>Foco em Performance</p>
                     </div>
                 </div>
                 <a href="#" class="btn-minimal">Conhecer o Conceito</a>
@@ -87,6 +119,37 @@
 
     <script>
     (function() {
+        // --- 1. Lógica do Menu Mobile ---
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const backdrop = document.getElementById('menuBackdrop');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            backdrop.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        if(openMenu) openMenu.addEventListener('click', toggleMenu);
+        if(closeMenu) closeMenu.addEventListener('click', toggleMenu);
+        if(backdrop) backdrop.addEventListener('click', toggleMenu);
+
+        // --- 2. Scroll Reveal (Intersection Observer) ---
+        const observerOptions = { threshold: 0.15 };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                }
+            });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll('.art-content, .art-visual');
+        revealElements.forEach(el => observer.observe(el));
+
+        // --- 3. Lógica da Névoa (Parallax Fog) ---
         const hero = document.querySelector('.hero');
         const artSection = document.querySelector('.art-section');
         const fog = document.querySelector('.hero-fog');
@@ -99,25 +162,64 @@
             const artTop = artSection.offsetTop;
             const viewportHeight = window.innerHeight;
 
-            // Distância do início da art section em relação ao fundo da hero
-            // Começa a aparecer quando a art section está a 300px de entrar
-            const startFade = heroBottom - viewportHeight * 0.3;
-            const endFade = artTop - viewportHeight * 0.2;
+            const startFade = heroBottom - viewportHeight * 0.4;
+            const endFade = artTop - viewportHeight * 0.1;
 
             let opacity = 0;
             if (scrollY > startFade) {
                 opacity = Math.min(1, (scrollY - startFade) / (endFade - startFade));
-                // Suavização com easing cúbico
                 opacity = opacity < 0.5 ? 2 * opacity * opacity : 1 - Math.pow(-2 * opacity + 2, 2) / 2;
             }
-
             fog.style.opacity = opacity;
         }
 
         window.addEventListener('scroll', updateFog, { passive: true });
-        updateFog(); // chamada inicial
+        updateFog();
     })();
-</script>
+    </script>
 
+    <!-- PRELOADER CONTROL SCRIPT (REFINADO COM ARTE) -->
+    <script>
+        (function() {
+            const preloader = document.getElementById('preloader');
+            const secondText = document.querySelector('.preloader-text.second');
+            const preloaderArt = document.querySelector('.preloader-art');
+            const mainElements = document.querySelectorAll('.navbar, .hero, .art-section');
+            
+            if (!preloader) return;
+            
+            document.body.style.overflow = 'hidden';
+            mainElements.forEach(el => {
+                if (el) el.setAttribute('inert', 'true');
+            });
+            
+            if (secondText) {
+                setTimeout(() => {
+                    if (preloaderArt) preloaderArt.classList.add('animate');
+                    secondText.classList.add('show');
+                }, 600);
+                
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.style.overflow = '';
+                    mainElements.forEach(el => {
+                        if (el) el.removeAttribute('inert');
+                    });
+                    setTimeout(() => {
+                        if (preloader && preloader.parentNode) preloader.remove();
+                    }, 1000);
+                }, 2400);
+            } else {
+                preloader.classList.add('fade-out');
+                document.body.style.overflow = '';
+                mainElements.forEach(el => {
+                    if (el) el.removeAttribute('inert');
+                });
+                setTimeout(() => {
+                    if (preloader && preloader.parentNode) preloader.remove();
+                }, 800);
+            }
+        })();
+    </script>
 </body>
 </html>
